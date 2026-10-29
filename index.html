@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sejarah Kelahiran Pancasila - MPI</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        arabic: ['Amiri', 'serif'],
+                    },
+                    colors: {
+                        kemenag: {
+                            light: '#10b981', // emerald-500
+                            DEFAULT: '#047857', // emerald-700
+                            dark: '#064e3b', // emerald-900
+                        },
+                        emas: '#d97706', // amber-600
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Animations */
+        body { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; overflow-x: hidden; background-color: #f0fdf4; }
+        .glass-panel { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .glass-dark { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+        
+        .hide { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s ease-in forwards; }
+        .slide-up { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .float-anim { animation: floating 3s ease-in-out infinite; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes floating { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e5e7eb; }
+        ::-webkit-scrollbar-thumb { background: #047857; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #064e3b; }
+
+        /* Interactive Items */
+        .interactive-item { cursor: pointer; transition: all 0.2s ease; border: 2px solid #e5e7eb; }
+        .interactive-item.selected { border-color: #d97706; background-color: #fef3c7; transform: scale(1.02); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .drop-zone { border: 2px dashed #9ca3af; min-height: 50px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+        .drop-zone.active { border-color: #047857; background-color: #d1fae5; }
+        .drop-zone.filled { border: 2px solid #047857; background-color: #f8fafc; border-style: solid; }
+
+        /* Background Pattern */
+        .bg-pattern { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23047857' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        
+        #pdf-content { display: none; }
+        @media print {
+            body * { visibility: hidden; }
+            #pdf-content, #pdf-content * { visibility: visible; }
+            #pdf-content { position: absolute; left: 0; top: 0; width: 100%; display: block !important; padding: 20px; background: white; }
+        }
+    </style>
+</head>
+<body class="bg-pattern text-slate-800 antialiased min-h-screen flex flex-col items-center justify-center relative">
+
+    <!-- GLOBAL CUSTOM MODAL (Alert Replacement) -->
+    <div id="custom-modal" class="fixed inset-0 z-[100] glass-dark flex items-center justify-center hide px-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full slide-up text-center border-t-4 border-kemenag">
+            <div id="modal-icon" class="text-4xl mb-4"></div>
+            <h3 id="modal-title" class="text-xl font-bold text-slate-800 mb-2"></h3>
+            <p id="modal-message" class="text-slate-600 mb-6"></p>
+            <button onclick="closeModal()" class="w-full bg-kemenag hover:bg-kemenag-dark text-white font-bold py-2 px-4 rounded-xl transition">Mengerti</button>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <main id="app-container" class="w-full max-w-4xl min-h-screen sm:min-h-[85vh] bg-white sm:rounded-3xl shadow-2xl overflow-hidden relative flex flex-col sm:my-8 border-4 border-white/50 relative z-10">
+        
+        <!-- ==================== 1. SPLASH SCREEN ==================== -->
+        <section id="screen-splash" class="absolute inset-0 bg-kemenag flex flex-col items-center justify-center z-50 transition-opacity duration-500">
+            <i class="fas fa-book-open text-6xl text-emas float-anim mb-4"></i>
+            <h1 class="text-3xl md:text-4xl font-bold text-white text-center px-4">Sejarah Kelahiran<br>Pancasila</h1>
+            <div class="w-16 h-1 bg-emas rounded-full mt-4 animate-pulse"></div>
+        </section>
+
+        <!-- ==================== 2. COVER SCREEN ==================== -->
+        <section id="screen-cover" class="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-b from-green-50 to-emerald-100 hide relative">
+            
+            <div class="text-center mb-8 slide-up">
+                <span class="inline-block bg-emas text-white text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide">Pendidikan Pancasila • Kelas V (Fase B)</span>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-kemenag mb-2 drop-shadow-sm">Sejarah Kelahiran</h1>
+                <h2 class="text-3xl md:text-4xl font-bold text-emas drop-shadow-sm">Pancasila</h2>
+            </div>
+
+            <!-- Visual Interaktif Gambar Garuda -->
+            <div class="w-48 h-48 md:w-64 md:h-64 mb-8 float-anim flex items-center justify-center">
+                <img src="garuda pancasila.jpeg" alt="Garuda Pancasila" class="w-full h-full object-contain drop-shadow-xl" onerror="this.outerHTML='<i class=\'fas fa-star text-9xl text-emas\'></i>'">
+            </div>
+
+            <!-- Tombol Aksi -->
+            <div class="flex flex-col sm:flex-row gap-4 w-full max-w-md slide-up" style="animation-delay: 0.2s;">
+                <button onclick="toggleModal('modal-pengembang')" class="flex-1 bg-white border-2 border-kemenag text-kemenag hover:bg-green-50 font-bold py-3 px-4 rounded-2xl shadow-sm transition flex items-center justify-center gap-2">
+                    <i class="fas fa-user-tie"></i> Pengembang
+                </button>
+                <button onclick="toggleModal('modal-tujuan')" class="flex-1 bg-white border-2 border-kemenag text-kemenag hover:bg-green-50 font-bold py-3 px-4 rounded-2xl shadow-sm transition flex items-center justify-center gap-2">
+                    <i class="fas fa-bullseye"></i> Tujuan
+                </button>
+            </div>
+            <button onclick="goToForm()" class="mt-4 w-full max-w-md bg-kemenag hover:bg-kemenag-dark text-white font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition duration-300 slide-up" style="animation-delay: 0.3s;">
+                MULAI BELAJAR <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+
+            <!-- SLIDE MENGAMBANG: Informasi Pengembang -->
+            <div id="modal-pengembang" class="fixed inset-0 z-50 glass-dark flex items-center justify-center hide px-4">
+                <div class="glass-panel rounded-3xl p-6 max-w-sm w-full text-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-24 bg-kemenag"></div>
+                    <div class="relative z-10 mt-6">
+                        <div class="w-24 h-24 mx-auto bg-white rounded-full p-1 shadow-md mb-4 flex items-center justify-center overflow-hidden border-4 border-white">
+                            <img src="https://iili.io/n8APS24.md.png" alt="Foto Pengembang" onerror="this.outerHTML='<div class=\'w-full h-full bg-slate-200 text-slate-500 flex items-center justify-center text-3xl font-bold\'>S</div>'" class="w-full h-full object-cover rounded-full">
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">SUSILAWATI, M.Pd</h3>
+                        <p class="text-sm font-semibold text-emas mb-1">MI Salafiyah Syafiiyah</p>
+                        <p class="text-xs text-slate-600 mb-6 bg-slate-100 py-1 px-2 rounded-lg inline-block break-all">susilawati_91000082178259@madrasah.kemenag.go.id</p>
+                        <button onclick="toggleModal('modal-pengembang')" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 rounded-xl transition">Kembali ke Cover</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE MENGAMBANG: Tujuan Pembelajaran -->
+            <div id="modal-tujuan" class="fixed inset-0 z-50 glass-dark flex items-center justify-center hide px-4">
+                <div class="glass-panel rounded-3xl p-6 max-w-md w-full relative">
+                    <h3 class="text-xl font-bold text-kemenag mb-4 flex items-center gap-2 border-b pb-2"><i class="fas fa-bullseye text-emas"></i> Tujuan Pembelajaran</h3>
+                    <div class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+                        <p class="text-slate-700 font-medium leading-relaxed">
+                            Peserta didik mampu memahami sejarah kelahiran Pancasila dan meneladani sikap para pendiri bangsa dalam kehidupan sehari-hari.
+                        </p>
+                        <div class="bg-green-50 p-4 rounded-xl border border-green-100">
+                            <p class="font-arabic text-2xl text-right mb-2 text-kemenag-dark leading-loose">وَأَمْرُهُمْ شُورَىٰ بَيْنَهُمْ</p>
+                            <p class="text-sm text-slate-600 italic">"...sedang urusan mereka (diputuskan) dengan musyawarah antara mereka..." (QS. Asy-Syura: 38)</p>
+                            <p class="text-xs text-slate-500 mt-2">Nilai Musyawarah para perumus Pancasila sejalan dengan tuntunan Al-Qur'an.</p>
+                        </div>
+                        <div class="bg-amber-50 p-3 rounded-xl border border-amber-100">
+                            <h4 class="text-sm font-bold text-emas mb-1"><i class="fas fa-heart"></i> Kurikulum Berbasis Cinta</h4>
+                            <p class="text-xs text-slate-700">Menanamkan kasih sayang kepada sesama makhluk ciptaan Allah, menjaga kelestarian lingkungan alam sekitar, bersikap moderat, dan mencintai tanah air Indonesia.</p>
+                        </div>
+                    </div>
+                    <button onclick="toggleModal('modal-tujuan')" class="mt-6 w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 rounded-xl transition">Kembali ke Cover</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 3. FORM IDENTITAS ==================== -->
+        <section id="screen-form" class="w-full h-full flex flex-col items-center justify-center p-6 bg-white hide relative">
+            <div class="w-full max-w-sm glass-panel shadow-xl rounded-3xl p-8 slide-up relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-kemenag to-emas"></div>
+                <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">Data Diri Siswa</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-600 mb-1">Nama Lengkap</label>
+                        <div class="relative">
+                            <i class="fas fa-user absolute left-3 top-3 text-slate-400"></i>
+                            <input type="text" id="input-nama" class="w-full pl-10 pr-4 py-2 border-2 border-slate-200 rounded-xl focus:border-kemenag focus:ring-0 outline-none transition" placeholder="Masukkan nama..." autocomplete="off">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-600 mb-1">Kelas</label>
+                        <div class="relative">
+                            <i class="fas fa-school absolute left-3 top-3 text-slate-400"></i>
+                            <select id="input-kelas" class="w-full pl-10 pr-4 py-2 border-2 border-slate-200 rounded-xl focus:border-kemenag focus:ring-0 outline-none transition appearance-none">
+                                <option value="" disabled selected>Pilih Kelas...</option>
+                                <option value="V-A">Kelas V-A</option>
+                                <option value="V-B">Kelas V-B</option>
+                                <option value="V-C">Kelas V-C</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-4 top-3 text-slate-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+                    <button onclick="submitForm()" class="w-full mt-4 bg-kemenag hover:bg-kemenag-dark text-white font-bold py-3 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                        Lanjut <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 4. PENGANTAR & PANDUAN ==================== -->
+        <section id="screen-guide" class="w-full h-full flex flex-col bg-slate-50 hide relative">
+            <div class="flex-1 flex items-center justify-center p-6 relative">
+                <!-- Slide Container -->
+                <div class="w-full max-w-lg glass-panel shadow-lg rounded-3xl p-6 min-h-[400px] flex flex-col relative overflow-hidden">
+                    
+                    <!-- Progress Dots -->
+                    <div class="flex justify-center gap-2 mb-6" id="guide-dots">
+                        <div class="w-3 h-3 rounded-full bg-kemenag"></div>
+                        <div class="w-3 h-3 rounded-full bg-slate-300"></div>
+                        <div class="w-3 h-3 rounded-full bg-slate-300"></div>
+                    </div>
+
+                    <!-- Slide Content -->
+                    <div id="guide-content" class="flex-1 flex flex-col items-center text-center justify-center slide-up">
+                        <!-- Injected via JS -->
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between mt-6 w-full gap-2">
+                        <button id="btn-guide-prev" onclick="navGuide(-1)" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-xl transition invisible"><i class="fas fa-chevron-left mr-1"></i> Kembali</button>
+                        <button id="btn-guide-next" onclick="navGuide(1)" class="flex-1 px-4 py-2 bg-kemenag hover:bg-kemenag-dark text-white font-bold rounded-xl transition shadow-md">Selanjutnya <i class="fas fa-chevron-right ml-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 5. MENU UTAMA (DASHBOARD) ==================== -->
+        <section id="screen-dashboard" class="w-full h-full flex flex-col bg-slate-50 hide">
+            <!-- Header -->
+            <header class="bg-kemenag text-white p-4 sm:p-6 rounded-b-3xl shadow-md relative z-10">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-sm font-medium text-green-100">Selamat Belajar,</h2>
+                        <h1 id="dash-nama" class="text-xl sm:text-2xl font-bold truncate max-w-[200px] sm:max-w-xs">Siswa</h1>
+                    </div>
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-kemenag text-xl font-bold shadow-inner">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Menu Cards -->
+            <div class="flex-1 p-6 overflow-y-auto">
+                <p class="text-slate-600 mb-6 font-medium text-center">Selesaikan misi secara berurutan!</p>
+                <div class="space-y-4 max-w-md mx-auto">
+                    
+                    <!-- Menu 1: Belajar -->
+                    <div id="card-belajar" onclick="startSection('belajar')" class="bg-white p-5 rounded-2xl shadow-sm border-2 border-transparent cursor-pointer transition transform hover:-translate-y-1 relative overflow-hidden group">
+                        <div class="absolute right-0 top-0 w-16 h-16 bg-green-100 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                        <div class="flex items-center gap-4 relative z-10">
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl text-white bg-blue-500 shadow-md">
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg text-slate-800">1. BELAJAR</h3>
+                                <p class="text-sm text-slate-500">Pahami Materi</p>
+                            </div>
+                            <div id="status-belajar" class="w-8 h-8 rounded-full bg-green-100 text-kemenag flex items-center justify-center">
+                                <i class="fas fa-unlock"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu 2: Bermain -->
+                    <div id="card-bermain" onclick="startSection('bermain')" class="bg-white p-5 rounded-2xl shadow-sm border-2 border-slate-200 cursor-pointer transition relative overflow-hidden opacity-75">
+                        <div class="flex items-center gap-4 relative z-10">
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl text-white bg-emas shadow-md grayscale">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg text-slate-800">2. BERMAIN</h3>
+                                <p class="text-sm text-slate-500">Tantangan Interaktif</p>
+                            </div>
+                            <div id="status-bermain" class="w-8 h-8 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu 3: Berlatih -->
+                    <div id="card-berlatih" onclick="startSection('berlatih')" class="bg-white p-5 rounded-2xl shadow-sm border-2 border-slate-200 cursor-pointer transition relative overflow-hidden opacity-75">
+                        <div class="flex items-center gap-4 relative z-10">
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl text-white bg-purple-500 shadow-md grayscale">
+                                <i class="fas fa-pencil-alt"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg text-slate-800">3. BERLATIH</h3>
+                                <p class="text-sm text-slate-500">Evaluasi Pemahaman</p>
+                            </div>
+                            <div id="status-berlatih" class="w-8 h-8 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Tombol Laporan (Muncul jika semua selesai) -->
+                <div id="btn-laporan-container" class="mt-8 text-center hide slide-up">
+                    <button onclick="showScreen('screen-report')" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2 mx-auto">
+                        <i class="fas fa-file-invoice"></i> Lihat Laporan Belajar
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 6. AREA PEMBELAJARAN (BELAJAR/BERMAIN/BERLATIH) ==================== -->
+        <!-- Reuseable Container for sections -->
+        <section id="screen-activity" class="w-full h-full flex flex-col bg-white hide">
+            <!-- Topbar -->
+            <div class="bg-white border-b px-4 py-3 flex items-center justify-between sticky top-0 z-20 shadow-sm">
+                <button onclick="backToDashboard()" class="w-10 h-10 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-600 transition">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="text-center">
+                    <h2 id="activity-title" class="font-bold text-slate-800 uppercase tracking-wide text-sm">BELAJAR</h2>
+                    <div id="activity-progress" class="text-xs text-slate-500 font-medium">Slide 1 / 6</div>
+                </div>
+                <div class="w-10 h-10"></div> <!-- Spacer -->
+            </div>
+
+            <!-- Content Area -->
+            <div class="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-50" id="activity-content-scroll">
+                <div id="activity-content" class="max-w-2xl mx-auto pb-20 slide-up">
+                    <!-- Dynamic Content Injected Here -->
+                </div>
+            </div>
+
+            <!-- Bottom Navigation/Action Bar -->
+            <div class="bg-white border-t p-4 sticky bottom-0 z-20 flex justify-between gap-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                <button id="btn-act-prev" onclick="navActivity(-1)" class="flex-1 py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition hidden">Sebelumnya</button>
+                <button id="btn-act-next" onclick="navActivity(1)" class="flex-1 py-3 px-4 bg-slate-300 text-slate-500 font-bold rounded-xl transition cursor-not-allowed">Selanjutnya <i class="fas fa-lock text-xs ml-1"></i></button>
+            </div>
+        </section>
+
+        <!-- ==================== 7. LAPORAN HASIL BELAJAR ==================== -->
+        <section id="screen-report" class="w-full h-full flex flex-col bg-slate-50 hide relative">
+            <div class="bg-kemenag text-white px-4 py-4 flex items-center justify-between sticky top-0 z-20 shadow-md">
+                <button onclick="showScreen('screen-dashboard')" class="w-10 h-10 rounded-full hover:bg-white/20 flex items-center justify-center transition">
+                    <i class="fas fa-home"></i>
+                </button>
+                <h2 class="font-bold">Laporan Hasil Belajar</h2>
+                <div class="w-10"></div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-4 sm:p-6">
+                <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm border p-6 mb-6">
+                    <div class="text-center mb-6 border-b pb-4">
+                        <i class="fas fa-medal text-5xl text-emas mb-3"></i>
+                        <h3 class="text-2xl font-bold text-slate-800">Luar Biasa!</h3>
+                        <p class="text-slate-600">Kamu telah menyelesaikan seluruh tahapan belajar.</p>
+                        
+                        <!-- Sync Status Indicator -->
+                        <div id="sync-status" class="mt-4 text-xs font-semibold px-3 py-1 rounded-full inline-block bg-blue-100 text-blue-700">
+                            <i class="fas fa-spinner fa-spin mr-1"></i> Mengirim data ke sistem...
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 text-center">
+                            <p class="text-sm text-slate-500 mb-1">Skor Bermain</p>
+                            <p id="rep-skor-bermain" class="text-2xl font-bold text-blue-600">0</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 text-center">
+                            <p class="text-sm text-slate-500 mb-1">Nilai Asesmen</p>
+                            <p id="rep-skor-berlatih" class="text-2xl font-bold text-purple-600">0</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 p-4 rounded-xl border border-green-200 mb-6">
+                        <h4 class="font-bold text-kemenag mb-2"><i class="fas fa-leaf mr-2"></i>Catatan Karakter</h4>
+                        <p class="text-sm text-slate-700 italic">Siswa menunjukkan kecintaan pada tanah air dan kelestarian alam Kecamatan Randangan dengan menyelesaikan modul yang sarat makna kebangsaan dan keislaman.</p>
+                    </div>
+
+                    <button onclick="generatePDF()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fas fa-file-pdf"></i> Unduh / Cetak Laporan PDF
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Container Khusus untuk Template PDF (Tersembunyi di UI, muncul saat print/export) -->
+        <div id="pdf-content">
+            <div style="text-align: center; border-bottom: 3px solid #047857; padding-bottom: 10px; margin-bottom: 20px;">
+                <h1 style="color: #047857; margin: 0; font-size: 24px;">LAPORAN HASIL BELAJAR - MPI</h1>
+                <h2 style="color: #d97706; margin: 5px 0 0 0; font-size: 18px;">SEJARAH KELAHIRAN PANCASILA</h2>
+                <p style="margin: 5px 0 0 0; font-size: 14px; color: #475569;">Pengembang: SUSILAWATI, M.Pd - MI Salafiyah Syafiiyah</p>
+            </div>
+            
+            <table style="width: 100%; margin-bottom: 20px; font-size: 14px;">
+                <tr>
+                    <td style="width: 150px; font-weight: bold;">Nama Siswa</td>
+                    <td>: <span id="pdf-nama"></span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Kelas</td>
+                    <td>: <span id="pdf-kelas"></span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Tanggal</td>
+                    <td>: <span id="pdf-tanggal"></span></td>
+                </tr>
+            </table>
+
+            <h3 style="background-color: #f1f5f9; padding: 8px; border-left: 4px solid #3b82f6;">1. Hasil Menu Bermain (Gamifikasi)</h3>
+            <p>Siswa telah menyelesaikan 10 tantangan interaktif berbasis literasi dan numerasi lokal dengan total skor: <strong id="pdf-skor-bermain" style="color: #2563eb; font-size: 18px;"></strong>/100.</p>
+
+            <h3 style="background-color: #f1f5f9; padding: 8px; border-left: 4px solid #8b5cf6;">2. Hasil Menu Berlatih (Asesmen)</h3>
+            <p>Nilai Akhir: <strong id="pdf-skor-berlatih" style="color: #7c3aed; font-size: 24px;"></strong>/100</p>
+            <p>Predikat: <strong id="pdf-predikat"></strong></p>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; margin-bottom: 20px;">
+                <thead>
+                    <tr style="background-color: #e2e8f0;">
+                        <th style="border: 1px solid #cbd5e1; padding: 6px;">Level Kognitif</th>
+                        <th style="border: 1px solid #cbd5e1; padding: 6px;">Jumlah Soal</th>
+                        <th style="border: 1px solid #cbd5e1; padding: 6px;">Bobot Total</th>
+                        <th style="border: 1px solid #cbd5e1; padding: 6px;">Poin Diperoleh</th>
+                    </tr>
+                </thead>
+                <tbody id="pdf-table-body">
+                    <!-- Injected via JS -->
+                </tbody>
+            </table>
+
+            <h3 style="background-color: #f1f5f9; padding: 8px; border-left: 4px solid #10b981;">3. Catatan Kurikulum Berbasis Cinta</h3>
+            <p style="font-size: 14px; line-height: 1.5;">Melalui materi Sejarah Pancasila yang dikaitkan dengan konteks pesisir dan agraris Kecamatan Randangan, siswa diharapkan dapat menumbuhkan rasa cinta kepada Allah SWT (Rahmatan lil 'alamin), cinta sesama manusia (menghargai musyawarah/perbedaan), cinta alam semesta (merawat lingkungan), serta cinta tanah air (meneladani perjuangan pendiri bangsa).</p>
+            <p style="font-size: 14px; font-style: italic; margin-top: 10px;">Rekomendasi Guru: Terus tingkatkan budaya literasi membaca dan pengamatan terhadap lingkungan sekitar.</p>
+        </div>
+
+    </main>
+
+    <script>
+        /* =========================================================
+           KONFIGURASI GOOGLE APPS SCRIPT (GAS)
+           PASTE URL WEB APP ANDA DI SINI!
+        ========================================================= */
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbwjqVy3_nZRlYWB2_IDmULnlJi_8LA3QWaREKmOPVVGP0U897dfFta5p33QJ6fzBzsQ/exec";
+
+        /* =========================================================
+           STATE MANAGEMENT & UTILS
+        ========================================================= */
+        const state = {
+            studentName: '',
+            studentClass: '',
+            progress: { belajar: false, bermain: false, berlatih: false },
+            currentSection: '',
+            currentIndex: 0,
+            belajarQuizzesDone: [false, false, false, false, false, false],
+            scores: { bermain: 0, berlatih: 0 },
+            berlatihDetails: { l1: 0, l2: 0, l3: 0 }, // Poin per level
+            detailJawaban: [] // Untuk menyimpan tracking jawaban per soal
+        };
+
+        // Utility: Show/Hide Screens
+        function showScreen(screenId) {
+            document.querySelectorAll('section[id^="screen-"]').forEach(s => s.classList.add('hide'));
+            document.getElementById(screenId).classList.remove('hide');
+            window.scrollTo(0,0);
+        }
+
+        // Utility: Custom Modal
+        function showModal(title, message, iconClass = 'fas fa-info-circle text-blue-500') {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('modal-icon').className = `text-5xl mb-4 ${iconClass}`;
+            document.getElementById('custom-modal').classList.remove('hide');
+        }
+        function closeModal() { document.getElementById('custom-modal').classList.add('hide'); }
+        function toggleModal(id) {
+            const el = document.getElementById(id);
+            if(el.classList.contains('hide')) el.classList.remove('hide');
+            else el.classList.add('hide');
+        }
+
+        /* =========================================================
+           DATA KONTEN (MATERI, BERMAIN, BERLATIH)
+        ========================================================= */
+        const materiData = [
+            {
+                title: "Kondisi Bangsa & Semangat Gotong Royong",
+                content: `
+                    <p class="mb-3">Kemerdekaan Indonesia tidak diraih dengan mudah. Pada masa penjajahan, bangsa kita mengalami banyak penderitaan. Namun, hal itu justru memupuk semangat persatuan.</p>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-3 mb-3 rounded-r-xl">
+                        <p class="font-semibold text-blue-800 text-sm mb-1"><i class="fas fa-map-marker-alt"></i> Konteks Lokal: Randangan</p>
+                        <p class="text-sm text-slate-700">Seperti para nelayan di pesisir pantai Kecamatan Randangan yang bergotong royong mendorong perahu dan menghadapi ombak lautan bersama-sama demi mencari nafkah. Semangat kebersamaan senasib inilah yang juga dirasakan para tokoh bangsa saat itu.</p>
+                    </div>
+                    <p class="mb-4">Perasaan senasib ini mendorong keinginan kuat untuk merdeka dan mengatur negara sendiri.</p>
+                `,
+                quizType: "mc",
+                quizQ: "Sikap apa dari nelayan Randangan yang mencerminkan semangat awal perjuangan kemerdekaan?",
+                quizOptions: ["Bersaing menangkap ikan", "Bergotong royong menghadapi ombak", "Berlayar sendirian di malam hari"],
+                quizAns: 1 // index 1
+            },
+            {
+                title: "Pembentukan BPUPKI",
+                content: `
+                    <p class="mb-3">Menjelang akhir Perang Dunia II, Jepang yang terdesak menjanjikan kemerdekaan kepada Indonesia. Untuk mempersiapkannya, dibentuklah BPUPKI (Badan Penyelidik Usaha-Usaha Persiapan Kemerdekaan Indonesia) pada tanggal 1 Maret 1945.</p>
+                    <div class="bg-green-50 p-4 rounded-xl mb-3 border border-green-200">
+                        <p class="font-arabic text-2xl text-right mb-2 text-kemenag">وَأَمْرُهُمْ شُورَىٰ بَيْنَهُمْ</p>
+                        <p class="text-xs text-slate-600 italic">"...sedang urusan mereka (diputuskan) dengan musyawarah antara mereka..." (QS. Asy-Syura: 38)</p>
+                        <p class="text-sm mt-2 text-slate-800"><strong>Hikmah:</strong> Pembentukan BPUPKI adalah wujud nyata nilai musyawarah dalam Islam. Tokoh bangsa berkumpul memikirkan pondasi negara, sama seperti petani agraris di Randangan bermusyawarah mengatur pembagian air irigasi dengan adil agar semua sawah subur (Cinta Sesama & Cinta Lingkungan).</p>
+                    </div>
+                `,
+                quizType: "mc",
+                quizQ: "Berdasarkan QS. Asy-Syura: 38, nilai Islam apa yang diterapkan saat pembentukan BPUPKI?",
+                quizOptions: ["Peperangan", "Musyawarah", "Perdagangan"],
+                quizAns: 1
+            },
+            {
+                title: "Sidang Pertama BPUPKI",
+                content: `
+                    <p class="mb-3">BPUPKI mengadakan sidang pertama pada 29 Mei – 1 Juni 1945 di Gedung Chuo Sangi In (kini Gedung Pancasila). Agenda utamanya sangat penting: <strong>Membahas Dasar Negara</strong>.</p>
+                    <p class="mb-3">Para tokoh dari berbagai latar belakang suku, agama, dan daerah berdebat namun tetap menjunjung tinggi sopan santun. Mereka menyadari bahwa negara yang besar butuh pondasi yang kuat menaungi keberagaman.</p>
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 mb-4">
+                        <p class="text-sm text-slate-700">Dalam merumuskan dasar negara, mereka melepaskan ego pribadi demi kepentingan bangsa. Inilah bentuk nyata dari <strong>Cinta Tanah Air</strong>.</p>
+                    </div>
+                `,
+                quizType: "mc",
+                quizQ: "Apa agenda utama pada Sidang Pertama BPUPKI tanggal 29 Mei – 1 Juni 1945?",
+                quizOptions: ["Memilih Presiden", "Membahas Dasar Negara", "Membentuk Tentara"],
+                quizAns: 1
+            },
+            {
+                title: "Gagasan Moh. Yamin & Soepomo",
+                content: `
+                    <p class="mb-3">Tiga tokoh utama menyampaikan gagasannya. Pada tanggal 29 Mei 1945, <strong>Mr. Mohammad Yamin</strong> mengusulkan lima asas: Peri Kebangsaan, Peri Kemanusiaan, Peri Ketuhanan, Peri Kerakyatan, dan Kesejahteraan Rakyat.</p>
+                    <p class="mb-3">Kemudian pada 31 Mei 1945, <strong>Prof. Dr. Mr. Soepomo</strong> menyampaikan gagasan tentang negara integralistik (persatuan) dengan asas: Persatuan, Kekeluargaan, Keseimbangan lahir batin, Musyawarah, dan Keadilan rakyat.</p>
+                    <p class="text-sm italic text-slate-600 mb-4">Gagasan-gagasan ini layaknya benih-benih unggul yang ditanam di dataran agraris Randangan, kelak tumbuh menjadi pohon rindang yang menaungi rakyat.</p>
+                `,
+                quizType: "dnd", // Tap to sort/fill
+                quizQ: "Lengkapi kalimat: Gagasan asas Persatuan, Kekeluargaan, dan Musyawarah disampaikan oleh...",
+                quizOptions: ["Soekarno", "Moh. Yamin", "Soepomo"],
+                quizAns: 2
+            },
+            {
+                title: "Lahirnya Istilah Pancasila (1 Juni)",
+                content: `
+                    <p class="mb-3">Puncaknya pada tanggal <strong>1 Juni 1945</strong>, Ir. Soekarno berpidato tanpa teks. Ia merumuskan lima dasar negara: Kebangsaan Indonesia, Internasionalisme (Peri Kemanusiaan), Mufakat/Demokrasi, Kesejahteraan Sosial, dan Ketuhanan yang berkebudayaan.</p>
+                    <p class="mb-3">Atas saran seorang ahli bahasa, Soekarno menamai kelima dasar tersebut dengan <strong>PANCASILA</strong> (Panca = lima, Sila = asas/dasar).</p>
+                    <p class="bg-green-100 p-3 rounded-lg text-sm text-green-900 font-semibold mb-4 border-l-4 border-kemenag">Tanggal 1 Juni inilah yang kemudian kita peringati sebagai Hari Lahir Pancasila setiap tahunnya.</p>
+                `,
+                quizType: "mc",
+                quizQ: "Siapa tokoh yang mengusulkan nama 'Pancasila' pada tanggal 1 Juni 1945?",
+                quizOptions: ["Ir. Soekarno", "Drs. Moh. Hatta", "Mr. Soepomo"],
+                quizAns: 0
+            },
+            {
+                title: "Panitia Sembilan & Piagam Jakarta",
+                content: `
+                    <p class="mb-3">Karena belum ada kesepakatan akhir, dibentuklah Panitia Sembilan. Pada 22 Juni 1945, mereka menghasilkan rumusan <strong>Piagam Jakarta (Jakarta Charter)</strong>.</p>
+                    <p class="mb-3 text-sm">Rumusan ini memuat ketuhanan dengan kewajiban menjalankan syariat Islam bagi pemeluknya. Namun demi menjaga persatuan bangsa Indonesia bagian timur, rumusan ini diubah menjadi "Ketuhanan Yang Maha Esa" pada 18 Agustus 1945.</p>
+                    <div class="bg-blue-50 p-3 rounded-xl border border-blue-200 mb-4">
+                        <p class="text-sm text-slate-700"><strong>Karakter Berbasis Cinta:</strong> Sikap legowo tokoh Islam saat itu menunjukkan toleransi tingkat tinggi (Cinta Sesama Insan) agar perahu besar bernama Indonesia tidak pecah, layaknya nelayan Randangan yang menjaga keseimbangan perahu di tengah badai.</p>
+                    </div>
+                `,
+                quizType: "mc",
+                quizQ: "Mengapa rumusan sila pertama Piagam Jakarta diubah menjadi 'Ketuhanan Yang Maha Esa'?",
+                quizOptions: ["Karena disuruh Jepang", "Demi menjaga persatuan dan toleransi", "Karena terlalu panjang"],
+                quizAns: 1
+            }
+        ];
+
+        const bermainData = [
+            {
+                type: "mc",
+                stimulus: "Hamparan hutan lindung di Kecamatan Randangan menjadi rumah bagi berbagai satwa dan sumber oksigen bagi warga. Untuk menjaga kelestariannya, warga desa sepakat untuk tidak menebang pohon sembarangan dan rutin melakukan penanaman kembali. Keputusan ini diambil tidak secara sepihak oleh kepala desa, melainkan melalui rembuk warga di balai desa. Semua warga bebas berpendapat dan keputusan diambil demi kebaikan bersama. Sikap warga desa ini mencerminkan semangat yang sama dengan peristiwa bersejarah menjelang kemerdekaan Indonesia.",
+                question: "Peristiwa sejarah manakah yang prosesnya paling mirip dengan musyawarah warga desa dalam menjaga hutan lindung Randangan tersebut?",
+                options: ["Penjajahan Belanda selama 350 tahun", "Sidang BPUPKI dalam merumuskan dasar negara", "Kerja paksa membangun jalan raya"],
+                ans: 1
+            },
+            {
+                type: "mc",
+                stimulus: "Para nelayan di pesisir Randangan seringkali menghadapi hasil tangkapan yang tidak menentu. Terkadang satu perahu mendapat banyak ikan, perahu lain kosong. Sesuai ajaran Islam untuk saling mengasihi (Rahmatan lil alamin), nelayan yang mendapat banyak ikan biasanya membagikan sebagian hasil tangkapannya kepada keluarga nelayan yang sedang kesusahan. Mereka sadar bahwa mereka adalah satu keluarga besar senasib sepenanggungan.",
+                question: "Sikap saling berbagi antar nelayan Randangan ini sejalan dengan salah satu asas yang diusulkan oleh Mr. Mohammad Yamin pada tanggal 29 Mei 1945. Asas apakah itu?",
+                options: ["Peri Ketuhanan", "Peri Kemanusiaan", "Peri Kerakyatan"],
+                ans: 1
+            },
+            {
+                type: "mc", // complex simplified to single choice best answer
+                stimulus: "Perhatikan data berikut: Pada tanggal 31 Mei 1945, seorang tokoh yang juga pakar hukum adat Indonesia menyampaikan pidatonya. Beliau menekankan konsep 'Negara Integralistik' atau negara persatuan. Negara tidak boleh memihak pada golongan terkuat, tetapi menjamin keselamatan hidup bangsa seluruhnya sebagai persatuan yang tak terpisahkan, ibarat satu tubuh dimana jika satu bagian sakit, semua ikut merasakan.",
+                question: "Berdasarkan stimulus di atas, siapa tokoh yang mengusulkan konsep 'Negara Integralistik' tersebut?",
+                options: ["Ir. Soekarno", "Prof. Dr. Mr. Soepomo", "Mr. Mohammad Yamin"],
+                ans: 1
+            },
+            {
+                type: "dnd", // Tap-to-move implementation
+                stimulus: "Sejarah perumusan Pancasila berjalan secara kronologis. Mulai dari pembentukan badan penyelidik, penyampaian gagasan oleh tokoh-tokoh bangsa, hingga lahirnya nama Pancasila.",
+                question: "Pilihlah tokoh yang berpidato merumuskan PANCASILA pada tanggal 1 Juni 1945!",
+                options: ["Moh. Hatta", "Ir. Soekarno", "Ki Hajar Dewantara"],
+                ans: 1
+            },
+            {
+                type: "mc",
+                stimulus: "Dalam Al-Qur'an Surah Asy-Syura ayat 38 disebutkan: '...sedang urusan mereka (diputuskan) dengan musyawarah antara mereka...'. Ayat ini menjadi prinsip penting dalam kehidupan berbangsa. Pada proses perumusan dasar negara, terjadi perdebatan hangat antara kelompok nasionalis sekuler dan kelompok Islam terkait bentuk negara.",
+                question: "Bagaimana cara para pendiri bangsa menyelesaikan perbedaan pendapat yang tajam tersebut sesuai dengan prinsip ayat di atas?",
+                options: ["Memaksakan kehendak kelompok mayoritas", "Mengedepankan dialog, toleransi, dan musyawarah mufakat", "Membubarkan sidang dan menunda kemerdekaan"],
+                ans: 1
+            },
+            {
+                type: "mc",
+                stimulus: "Wilayah dataran agraris Randangan menghasilkan jagung yang melimpah. Hasil panen ini dijual ke kota, namun petani tidak menentukan harga semaunya sendiri, ada koperasi desa yang mengatur agar harga stabil dan semua petani mendapat keuntungan yang wajar (adil).",
+                question: "Konsep kesejahteraan bersama dan keadilan yang diterapkan koperasi desa ini selaras dengan salah satu dasar yang diusulkan Soekarno pada 1 Juni 1945, yaitu...",
+                options: ["Internasionalisme", "Kesejahteraan Sosial", "Kebangsaan Indonesia"],
+                ans: 1
+            },
+            {
+                type: "dnd",
+                stimulus: "Pada masa persidangan BPUPKI, Jepang masih mengawasi jalannya sidang. Meskipun diawasi, para tokoh bangsa kita tidak merasa takut. Mereka dengan berani menyuarakan isi hatinya untuk merdeka.",
+                question: "Sikap berani menyuarakan kebenaran demi bangsa disebut sikap...",
+                options: ["Pengecut", "Cinta Tanah Air (Patriotisme)", "Acuh tak acuh"],
+                ans: 1
+            },
+            {
+                type: "mc",
+                stimulus: "Panitia Sembilan mengadakan rapat di rumah Soekarno pada 22 Juni 1945. Mereka berhasil menyusun sebuah dokumen bersejarah yang berisi rancangan pembukaan hukum dasar. Dokumen ini merupakan hasil kompromi antara golongan kebangsaan dan golongan Islam.",
+                question: "Apa nama dokumen bersejarah hasil rumusan Panitia Sembilan tersebut?",
+                options: ["Piagam Jakarta (Jakarta Charter)", "Teks Proklamasi", "Dekrit Presiden"],
+                ans: 0
+            },
+            {
+                type: "mc",
+                stimulus: "Perubahan sila pertama dari rumusan Piagam Jakarta ('Ketuhanan dengan kewajiban menjalankan syariat Islam bagi pemeluk-pemeluknya') menjadi 'Ketuhanan Yang Maha Esa' terjadi pada 18 Agustus 1945.",
+                question: "Alasan utama tokoh-tokoh Islam mengalah dan menyetujui perubahan tersebut adalah...",
+                options: ["Untuk mendapatkan bantuan dari Sekutu", "Demi menjaga keutuhan dan persatuan bangsa Indonesia dari Timur ke Barat", "Karena tidak paham maknanya"],
+                ans: 1
+            },
+            {
+                type: "mc",
+                stimulus: "Kini, Pancasila telah menjadi dasar negara yang kokoh. Sebagai siswa MI Salafiyah Syafiiyah yang hidup di wilayah kaya alam seperti Randangan, tugas kita bukan lagi merumuskan Pancasila, melainkan menjaganya.",
+                question: "Cara terbaik siswa MI meneladani semangat pendiri bangsa dalam kehidupan sehari-hari adalah...",
+                options: ["Ikut berperang menggunakan senjata tajam", "Giat belajar, rukun dengan teman, dan menjaga kebersihan alam sekitar", "Hanya menghafal teks Pancasila tanpa diamalkan"],
+                ans: 1
+            }
+        ];
+
+        const berlatihData = [
+            {
+                level: 1, poin: 8,
+                stimulus: "Badan Penyelidik Usaha-Usaha Persiapan Kemerdekaan Indonesia (BPUPKI) dibentuk pada tanggal 1 Maret 1945. Dalam bahasa Jepang, BPUPKI dikenal dengan nama Dokuritsu Junbi Cosakai. Badan ini bertugas menyelidiki segala sesuatu mengenai persiapan kemerdekaan Indonesia.",
+                q: "Apa tugas utama dari dibentuknya BPUPKI?",
+                options: ["Menyusun teks proklamasi", "Menyelidiki usaha persiapan kemerdekaan dan merumuskan dasar negara", "Membentuk tentara nasional"],
+                ans: 1
+            },
+            {
+                level: 1, poin: 8,
+                stimulus: "Sidang pertama BPUPKI dilaksanakan pada tanggal 29 Mei sampai 1 Juni 1945. Sidang ini membahas tentang dasar negara Indonesia merdeka. Ada tiga tokoh utama yang menyampaikan gagasannya.",
+                q: "Siapa sajakah tiga tokoh yang mengusulkan rumusan dasar negara pada sidang BPUPKI I?",
+                options: ["Soekarno, Hatta, Sjahrir", "Moh. Yamin, Soepomo, Soekarno", "Ahmad Subarjo, Wahid Hasyim, Agus Salim"],
+                ans: 1
+            },
+            {
+                level: 1, poin: 8,
+                stimulus: "Pada tanggal 1 Juni 1945, Ir. Soekarno berpidato mengusulkan lima dasar negara. Ia juga memberikan nama untuk kelima dasar tersebut atas saran seorang teman ahli bahasa.",
+                q: "Apa nama yang diberikan Ir. Soekarno untuk lima dasar negara yang diusulkannya?",
+                options: ["Pancasila", "Sapta Marga", "Tri Sila"],
+                ans: 0
+            },
+            {
+                level: 2, poin: 10,
+                stimulus: "Masyarakat di pesisir Randangan terdiri dari berbagai suku yang hidup rukun berdampingan. Saat merumuskan dasar negara, tokoh bangsa kita juga berasal dari berbagai daerah dan golongan, namun mereka bersatu. Sikap ini sesuai dengan usulan asas Moh. Yamin pada 29 Mei 1945.",
+                q: "Asas Moh. Yamin yang mencerminkan sikap persatuan dan kesatuan bangsa dari berbagai suku adalah...",
+                options: ["Peri Ketuhanan", "Peri Kebangsaan", "Kesejahteraan Rakyat"],
+                ans: 1
+            },
+            {
+                level: 2, poin: 10,
+                stimulus: "Panitia Sembilan diketuai oleh Ir. Soekarno dan beranggotakan perwakilan golongan Islam dan nasionalis. Mereka bermusyawarah intensif (sebagaimana nilai QS. Asy-Syura: 38) untuk mencari titik temu.",
+                q: "Apa hasil kesepakatan panitia sembilan pada tanggal 22 Juni 1945?",
+                options: ["UUD 1945", "Piagam Jakarta", "Supersemar"],
+                ans: 1
+            },
+            {
+                level: 2, poin: 10,
+                stimulus: "Menjaga kelestarian hutan mangrove di pesisir Randangan adalah bentuk tanggung jawab kita sebagai manusia kepada Sang Pencipta dan sesama (Kurikulum Berbasis Cinta). Para perumus Pancasila juga menempatkan nilai ketuhanan dan kemanusiaan sebagai pondasi negara.",
+                q: "Siapa tokoh yang mengusulkan rumusan 'Ketuhanan yang berkebudayaan' pada pidatonya tanggal 1 Juni 1945?",
+                options: ["Moh. Yamin", "Soepomo", "Ir. Soekarno"],
+                ans: 2
+            },
+            {
+                level: 2, poin: 10,
+                stimulus: "Tokoh-tokoh Islam Timur (seperti perwakilan dari Maluku dan sekitarnya) merasa keberatan dengan rumusan sila pertama Piagam Jakarta. Mohammad Hatta kemudian mendekati tokoh-tokoh Islam seperti Ki Bagoes Hadikoesoemo dan K.H. Wahid Hasyim untuk membicarakan hal ini secara kekeluargaan.",
+                q: "Tindakan Moh. Hatta tersebut merupakan penerapan nyata dari nilai...",
+                options: ["Otoriter", "Musyawarah Mufakat", "Individualisme"],
+                ans: 1
+            },
+            {
+                level: 3, poin: 12,
+                stimulus: "Andi, seorang siswa kelas V di Randangan, melihat teman-temannya bertengkar saat menentukan jenis permainan pada jam istirahat. Mengingat sejarah BPUPKI dimana para pendiri bangsa saling berdebat namun tetap menjunjung tinggi rasa persaudaraan dan rela berkorban demi persatuan.",
+                q: "Berdasarkan analisis sejarah perumusan Pancasila, tindakan paling tepat yang harus dilakukan Andi adalah...",
+                options: ["Membela teman yang paling kuat agar cepat selesai", "Menyuruh semuanya pulang dan tidak usah bermain", "Mengajak teman-temannya duduk bersama dan berdiskusi mencari permainan yang disukai semua pihak"],
+                ans: 2
+            },
+            {
+                level: 3, poin: 12,
+                stimulus: "Perubahan tujuh kata dalam Piagam Jakarta menjadi 'Ketuhanan Yang Maha Esa' bukanlah sebuah kekalahan bagi umat Islam, melainkan sebuah kemenangan besar bagi keutuhan bangsa Indonesia. Ini menunjukkan kebesaran jiwa (Tasamuh/Toleransi).",
+                q: "Jika tokoh Islam saat itu bersikeras mempertahankan tujuh kata tersebut tanpa memperdulikan kelompok minoritas, kemungkinan terburuk yang bisa terjadi berdasarkan logika sejarah adalah...",
+                options: ["Indonesia merdeka lebih cepat", "Jepang akan memberikan hadiah kemerdekaan", "Negara Indonesia bisa terpecah belah sebelum berdiri kokoh"],
+                ans: 2
+            },
+            {
+                level: 3, poin: 12,
+                stimulus: "Kurikulum Berbasis Cinta mengajarkan kita mencintai kelestarian lingkungan hidup. Nilai-nilai Pancasila (terutama Ketuhanan, Kemanusiaan, dan Keadilan) sebenarnya menuntut kita tidak hanya adil pada manusia, tapi juga pada alam.",
+                q: "Dari fakta sejarah bahwa perumus Pancasila memikirkan keselamatan 'bangsa seluruhnya' (Integralistik Soepomo), bagaimana konsep ini bisa diterapkan untuk menjaga hutan lindung di Randangan saat ini?",
+                options: ["Hutan boleh dieksploitasi sepenuhnya demi kekayaan satu dua orang pengusaha", "Menjaga kelestarian hutan merupakan wujud menjaga keselamatan hidup seluruh warga dari bencana alam, bukan hanya untuk kepentingan individu", "Menjual lahan hutan kepada pihak asing agar cepat mendapat uang tunai"],
+                ans: 1
+            }
+        ];
+
+
+        /* =========================================================
+           APPLICATION LOGIC
+        ========================================================= */
+
+        // Splash Screen Logic
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('screen-splash').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('screen-splash').classList.add('hide');
+                    showScreen('screen-cover');
+                }, 500);
+            }, 2000);
+        });
+
+        // Form Login
+        function goToForm() {
+            showScreen('screen-form');
+        }
+
+        function submitForm() {
+            const nama = document.getElementById('input-nama').value.trim();
+            const kelas = document.getElementById('input-kelas').value;
+
+            if(!nama || !kelas) {
+                showModal('Peringatan', 'Silakan isi Nama Lengkap dan pilih Kelas terlebih dahulu!', 'fas fa-exclamation-triangle text-amber-500');
+                return;
+            }
+
+            state.studentName = nama;
+            state.studentClass = kelas;
+            document.getElementById('dash-nama').innerText = nama;
+            
+            // Build Guide Slides
+            buildGuideSlides();
+            showScreen('screen-guide');
+        }
+
+        // Guide System
+        let guideIndex = 0;
+        const guideContent = [
+            `<div>
+                <i class="fas fa-hand-sparkles text-5xl text-kemenag mb-4 float-anim"></i>
+                <h3 class="text-2xl font-bold text-slate-800 mb-2">Selamat Datang, ${state.studentName}!</h3>
+                <p class="text-slate-600">Di Media Pembelajaran Interaktif <strong>Sejarah Kelahiran Pancasila</strong>.</p>
+            </div>`,
+            `<div>
+                <i class="fas fa-route text-5xl text-blue-500 mb-4 float-anim"></i>
+                <h3 class="text-2xl font-bold text-slate-800 mb-2">Petunjuk Belajar</h3>
+                <p class="text-slate-600">Ada 3 Tahapan: <strong>BELAJAR</strong>, <strong>BERMAIN</strong>, dan <strong>BERLATIH</strong>. Selesaikan secara berurutan untuk membuka kunci tahapan berikutnya.</p>
+            </div>`,
+            `<div>
+                <i class="fas fa-seedling text-5xl text-green-500 mb-4 float-anim"></i>
+                <h3 class="text-2xl font-bold text-slate-800 mb-2">Siap Mulai?</h3>
+                <p class="text-slate-600">Mari belajar sejarah sambil menanamkan nilai cinta kasih dan menjaga lingkungan sekitar kita.</p>
+            </div>`
+        ];
+
+        function buildGuideSlides() {
+            document.getElementById('guide-content').innerHTML = guideContent[guideIndex];
+            updateGuideNav();
+        }
+
+        function navGuide(dir) {
+            guideIndex += dir;
+            if (guideIndex < 0) guideIndex = 0;
+            if (guideIndex > guideContent.length - 1) {
+                showScreen('screen-dashboard');
+                return;
+            }
+            
+            const dots = document.getElementById('guide-dots').children;
+            for(let i=0; i<dots.length; i++) {
+                dots[i].className = i === guideIndex ? 'w-3 h-3 rounded-full bg-kemenag' : 'w-3 h-3 rounded-full bg-slate-300';
+            }
+            
+            const contentDiv = document.getElementById('guide-content');
+            contentDiv.classList.remove('slide-up');
+            void contentDiv.offsetWidth; // trigger reflow
+            contentDiv.classList.add('slide-up');
+            contentDiv.innerHTML = guideContent[guideIndex];
+            
+            updateGuideNav();
+        }
+
+        function updateGuideNav() {
+            document.getElementById('btn-guide-prev').classList.toggle('invisible', guideIndex === 0);
+            if(guideIndex === guideContent.length - 1) {
+                document.getElementById('btn-guide-next').innerHTML = 'Masuk Menu Utama <i class="fas fa-sign-in-alt ml-1"></i>';
+            } else {
+                document.getElementById('btn-guide-next').innerHTML = 'Selanjutnya <i class="fas fa-chevron-right ml-1"></i>';
+            }
+        }
+
+        // Dashboard & Locking Logic
+        function updateDashboardStatus() {
+            // Bermain Logic
+            const cardBermain = document.getElementById('card-bermain');
+            const statusBermain = document.getElementById('status-bermain');
+            if(state.progress.belajar) {
+                cardBermain.classList.remove('opacity-75', 'border-slate-200');
+                cardBermain.classList.add('border-transparent');
+                statusBermain.className = 'w-8 h-8 rounded-full bg-emas/20 text-emas flex items-center justify-center';
+                statusBermain.innerHTML = '<i class="fas fa-unlock"></i>';
+                cardBermain.children[0].children[0].classList.remove('grayscale');
+            }
+
+            // Berlatih Logic
+            const cardBerlatih = document.getElementById('card-berlatih');
+            const statusBerlatih = document.getElementById('status-berlatih');
+            if(state.progress.bermain) {
+                cardBerlatih.classList.remove('opacity-75', 'border-slate-200');
+                cardBerlatih.classList.add('border-transparent');
+                statusBerlatih.className = 'w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center';
+                statusBerlatih.innerHTML = '<i class="fas fa-unlock"></i>';
+                cardBerlatih.children[0].children[0].classList.remove('grayscale');
+            }
+
+            if(state.progress.berlatih) {
+                document.getElementById('btn-laporan-container').classList.remove('hide');
+            }
+        }
+
+        function startSection(section) {
+            if(section === 'bermain' && !state.progress.belajar) {
+                showModal('Menu Terkunci 🔒', 'Selesaikan materi di menu BELAJAR terlebih dahulu.', 'fas fa-lock text-amber-500');
+                return;
+            }
+            if(section === 'berlatih' && !state.progress.bermain) {
+                showModal('Menu Terkunci 🔒', 'Selesaikan tantangan di menu BERMAIN terlebih dahulu.', 'fas fa-lock text-amber-500');
+                return;
+            }
+
+            state.currentSection = section;
+            state.currentIndex = 0;
+            document.getElementById('activity-title').innerText = section;
+            
+            showScreen('screen-activity');
+            renderActivity();
+        }
+
+        function backToDashboard() {
+            updateDashboardStatus();
+            showScreen('screen-dashboard');
+        }
+
+        // --- RENDER ACTIVITY LOGIC ---
+        let selectedOptionIndex = null; 
+
+        function renderActivity() {
+            const container = document.getElementById('activity-content');
+            const progress = document.getElementById('activity-progress');
+            const btnPrev = document.getElementById('btn-act-prev');
+            const btnNext = document.getElementById('btn-act-next');
+            const scrollArea = document.getElementById('activity-content-scroll');
+            
+            container.classList.remove('slide-up');
+            void container.offsetWidth;
+            container.classList.add('slide-up');
+            scrollArea.scrollTo(0,0);
+            selectedOptionIndex = null;
+
+            if (state.currentSection === 'belajar') {
+                const data = materiData[state.currentIndex];
+                progress.innerText = `Materi ${state.currentIndex + 1} / ${materiData.length}`;
+                
+                let quizHTML = '';
+                const isQuizDone = state.belajarQuizzesDone[state.currentIndex];
+                
+                if (data.quizType === 'mc') {
+                    quizHTML = `
+                        <div class="mt-6 bg-white p-4 rounded-xl border-2 ${isQuizDone ? 'border-green-400' : 'border-slate-200'} shadow-sm relative">
+                            ${isQuizDone ? '<div class="absolute -top-3 -right-3 bg-green-500 text-white rounded-full p-2 w-8 h-8 flex justify-center items-center"><i class="fas fa-check"></i></div>' : ''}
+                            <h4 class="font-bold text-slate-800 mb-3 text-sm"><i class="fas fa-question-circle text-kemenag mr-1"></i> Tantangan Pemahaman</h4>
+                            <p class="text-sm text-slate-700 mb-3">${data.quizQ}</p>
+                            <div class="space-y-2">
+                                ${data.quizOptions.map((opt, idx) => `
+                                    <button onclick="checkBelajarQuiz(${idx}, ${data.quizAns})" class="w-full text-left p-3 rounded-lg border text-sm transition ${isQuizDone && idx === data.quizAns ? 'bg-green-100 border-green-500 text-green-800 font-bold' : (isQuizDone ? 'opacity-50 pointer-events-none' : 'hover:bg-slate-50 border-slate-200')}">
+                                        ${String.fromCharCode(65 + idx)}. ${opt}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                } else if (data.quizType === 'dnd') {
+                    quizHTML = `
+                        <div class="mt-6 bg-white p-4 rounded-xl border-2 ${isQuizDone ? 'border-green-400' : 'border-slate-200'} shadow-sm relative">
+                            ${isQuizDone ? '<div class="absolute -top-3 -right-3 bg-green-500 text-white rounded-full p-2 w-8 h-8 flex justify-center items-center"><i class="fas fa-check"></i></div>' : ''}
+                            <h4 class="font-bold text-slate-800 mb-3 text-sm"><i class="fas fa-hand-pointer text-kemenag mr-1"></i> Tap-to-Fill (Sentuh opsi)</h4>
+                            <p class="text-sm text-slate-700 mb-3">${data.quizQ.replace('...', `<span id="dnd-target" class="inline-block px-4 py-1 mx-1 border-b-2 border-slate-400 text-kemenag font-bold min-w-[100px] text-center bg-slate-50">${isQuizDone ? data.quizOptions[data.quizAns] : '...'}</span>`)}</p>
+                            <div class="flex flex-wrap gap-2 mt-4" id="dnd-pool">
+                                ${isQuizDone ? '' : data.quizOptions.map((opt, idx) => `
+                                    <button onclick="selectDndOption(${idx}, ${data.quizAns}, '${opt}')" class="px-4 py-2 bg-white border border-slate-300 rounded-lg text-sm shadow-sm hover:bg-slate-50 transition active:scale-95">
+                                        ${opt}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = `
+                    <h3 class="text-2xl font-bold text-kemenag mb-4 border-b-2 border-green-200 pb-2">${data.title}</h3>
+                    <div class="text-slate-700 leading-relaxed text-sm sm:text-base">${data.content}</div>
+                    ${quizHTML}
+                `;
+
+                btnPrev.classList.toggle('hidden', state.currentIndex === 0);
+                
+                if(isQuizDone) {
+                    btnNext.className = 'flex-1 py-3 px-4 bg-kemenag hover:bg-kemenag-dark text-white font-bold rounded-xl transition shadow-md';
+                    btnNext.innerHTML = state.currentIndex === materiData.length - 1 ? 'Selesai Belajar <i class="fas fa-check-circle ml-1"></i>' : 'Selanjutnya <i class="fas fa-chevron-right ml-1"></i>';
+                    btnNext.onclick = () => navActivity(1);
+                } else {
+                    btnNext.className = 'flex-1 py-3 px-4 bg-slate-300 text-slate-500 font-bold rounded-xl transition cursor-not-allowed';
+                    btnNext.innerHTML = 'Selanjutnya <i class="fas fa-lock text-xs ml-1"></i>';
+                    btnNext.onclick = () => showModal('Terkunci', 'Selesaikan Tantangan Pemahaman di bawah materi terlebih dahulu.', 'fas fa-info-circle text-amber-500');
+                }
+
+            } else if (state.currentSection === 'bermain') {
+                const data = bermainData[state.currentIndex];
+                progress.innerText = `Tantangan ${state.currentIndex + 1} / ${bermainData.length}`;
+                
+                let interactionHTML = '';
+                if(data.type === 'mc') {
+                    interactionHTML = `
+                        <div class="space-y-3 mt-6">
+                            ${data.options.map((opt, idx) => `
+                                <button onclick="answerBermain(${idx}, ${data.ans})" class="w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-emas hover:bg-amber-50 transition flex items-start gap-3 bg-white shadow-sm">
+                                    <span class="w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center flex-shrink-0 text-sm mt-0.5">${String.fromCharCode(65+idx)}</span>
+                                    <span class="text-slate-700">${opt}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    `;
+                } else if (data.type === 'dnd') {
+                    interactionHTML = `
+                        <div class="mt-6 bg-blue-50 p-4 rounded-xl border border-blue-200">
+                            <p class="text-sm font-semibold text-blue-800 mb-2"><i class="fas fa-info-circle"></i> Sentuh pilihan jawaban di bawah ini untuk memilih.</p>
+                            <div class="grid grid-cols-1 gap-2 mt-4">
+                                ${data.options.map((opt, idx) => `
+                                    <button onclick="answerBermain(${idx}, ${data.ans})" class="w-full text-center p-3 rounded-xl border-2 border-slate-300 bg-white hover:border-kemenag hover:bg-green-50 transition shadow-sm font-medium text-slate-700 active:scale-95">
+                                        ${opt}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = `
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-4">
+                        <div class="flex items-center gap-2 mb-3 border-b pb-2">
+                            <i class="fas fa-file-alt text-emas"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">Stimulus Cerita (Literasi)</h4>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed text-justify">${data.stimulus}</p>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">${data.question}</h3>
+                    ${interactionHTML}
+                `;
+                
+                btnPrev.classList.add('hidden');
+                btnNext.classList.add('hidden');
+
+            } else if (state.currentSection === 'berlatih') {
+                const data = berlatihData[state.currentIndex];
+                progress.innerText = `Soal ${state.currentIndex + 1} / ${berlatihData.length}`;
+                
+                let badgeClass = data.level === 1 ? 'bg-green-100 text-green-700' : (data.level === 2 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700');
+                let levelText = data.level === 1 ? 'Level 1: Dasar' : (data.level === 2 ? 'Level 2: Sedang' : 'Level 3: HOTS');
+
+                container.innerHTML = `
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold px-2 py-1 rounded-md ${badgeClass} uppercase">${levelText}</span>
+                        <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-md">Bobot: ${data.poin} Poin</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-4">
+                         <p class="text-sm text-slate-700 leading-relaxed text-justify">${data.stimulus}</p>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-4">${data.q}</h3>
+                    <div class="space-y-3">
+                        ${data.options.map((opt, idx) => `
+                            <button onclick="answerBerlatih(${idx}, ${data.ans}, ${data.poin}, ${data.level})" class="w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-kemenag hover:bg-green-50 transition flex items-start gap-3 bg-white shadow-sm">
+                                <span class="w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center flex-shrink-0 text-sm mt-0.5">${String.fromCharCode(65+idx)}</span>
+                                <span class="text-slate-700">${opt}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+
+                btnPrev.classList.add('hidden');
+                btnNext.classList.add('hidden');
+            }
+        }
+
+        // --- INTERACTIONS LOGIC ---
+        function checkBelajarQuiz(selectedIdx, ansIdx) {
+            if(state.belajarQuizzesDone[state.currentIndex]) return;
+            if(selectedIdx === ansIdx) {
+                state.belajarQuizzesDone[state.currentIndex] = true;
+                renderActivity();
+            } else {
+                showModal('Belum Tepat', 'Coba baca materinya sekali lagi dan pilih jawaban yang benar.', 'fas fa-times-circle text-red-500');
+            }
+        }
+
+        function selectDndOption(selectedIdx, ansIdx, text) {
+             if(state.belajarQuizzesDone[state.currentIndex]) return;
+             if(selectedIdx === ansIdx) {
+                 state.belajarQuizzesDone[state.currentIndex] = true;
+                 renderActivity();
+             } else {
+                 showModal('Kurang Tepat', 'Opsi ini tidak cocok untuk melengkapi kalimat.', 'fas fa-exclamation-circle text-amber-500');
+             }
+        }
+
+        function navActivity(dir) {
+            if (state.currentSection === 'belajar') {
+                if (dir === 1 && state.currentIndex === materiData.length - 1) {
+                    state.progress.belajar = true;
+                    showModal('Misi Selesai! 🎉', 'Luar biasa! Kamu telah menyelesaikan materi Belajar. Menu BERMAIN sekarang terbuka.', 'fas fa-star text-emas');
+                    backToDashboard();
+                    return;
+                }
+                state.currentIndex += dir;
+                renderActivity();
+            }
+        }
+
+        function answerBermain(selectedIdx, ansIdx) {
+            const qData = bermainData[state.currentIndex];
+            const isCorrect = (selectedIdx === ansIdx);
+            
+            // Catat Detail Jawaban
+            state.detailJawaban.push({
+                menu: "Bermain",
+                pertanyaan: qData.question,
+                jawaban_siswa: qData.options[selectedIdx],
+                kunci_jawaban: qData.options[ansIdx],
+                status: isCorrect ? "Benar" : "Salah"
+            });
+
+            if(isCorrect) {
+                state.scores.bermain += 10;
+                showToast('Benar! +10 Poin', 'bg-green-500');
+            } else {
+                showToast('Kurang Tepat!', 'bg-red-500');
+            }
+            
+            setTimeout(() => {
+                if(state.currentIndex < bermainData.length - 1) {
+                    state.currentIndex++;
+                    renderActivity();
+                } else {
+                    state.progress.bermain = true;
+                    showModal('Tantangan Selesai! 🎮', `Skor Bermain Kamu: ${state.scores.bermain}/100. Menu BERLATIH (Asesmen) sekarang terbuka.`, 'fas fa-gamepad text-emas');
+                    backToDashboard();
+                }
+            }, 800);
+        }
+
+        function answerBerlatih(selectedIdx, ansIdx, poin, level) {
+            const qData = berlatihData[state.currentIndex];
+            const isCorrect = (selectedIdx === ansIdx);
+
+            // Catat Detail Jawaban
+            state.detailJawaban.push({
+                menu: "Berlatih",
+                pertanyaan: qData.q,
+                jawaban_siswa: qData.options[selectedIdx],
+                kunci_jawaban: qData.options[ansIdx],
+                status: isCorrect ? "Benar" : "Salah"
+            });
+
+            if(isCorrect) {
+                state.scores.berlatih += poin;
+                if(level === 1) state.berlatihDetails.l1 += poin;
+                if(level === 2) state.berlatihDetails.l2 += poin;
+                if(level === 3) state.berlatihDetails.l3 += poin;
+            }
+
+            setTimeout(() => {
+                if(state.currentIndex < berlatihData.length - 1) {
+                    state.currentIndex++;
+                    renderActivity();
+                } else {
+                    state.progress.berlatih = true;
+                    prepareReport();
+                    showModal('Asesmen Selesai! 📝', `Selamat! Kamu telah menyelesaikan seluruh evaluasi. Mari lihat laporan belajarmu.`, 'fas fa-clipboard-check text-kemenag');
+                    backToDashboard();
+                }
+            }, 500);
+        }
+
+        function showToast(msg, bgClass) {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-20 left-1/2 transform -translate-x-1/2 ${bgClass} text-white px-6 py-2 rounded-full shadow-lg z-[100] font-bold slide-up`;
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 1500);
+        }
+
+        // --- PENGIRIMAN DATA KE GOOGLE APPS SCRIPT ---
+        function sendDataToGAS() {
+            const syncStatus = document.getElementById('sync-status');
+            
+            if (GAS_URL === "URL_GAS_ANDA_DISINI") {
+                syncStatus.className = "mt-4 text-xs font-semibold px-3 py-1 rounded-full inline-block bg-amber-100 text-amber-700";
+                syncStatus.innerHTML = '<i class="fas fa-exclamation-triangle mr-1"></i> Data tidak dikirim. (URL GAS belum diatur)';
+                return;
+            }
+
+            const payload = {
+                nama: state.studentName,
+                kelas: state.studentClass,
+                skor_bermain: state.scores.bermain,
+                skor_berlatih: state.scores.berlatih,
+                detail: state.detailJawaban,
+                soal_bermain: bermainData,
+                soal_berlatih: berlatihData
+            };
+
+            fetch(GAS_URL, {
+                method: 'POST',
+                body: JSON.stringify(payload),
+                // Gunakan text/plain untuk bypass CORS preflight sederhana di GAS
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                redirect: 'follow' // Penting untuk Google Apps Script (otomatis handle HTTP 302)
+            })
+            .then(response => response.text()) // Ubah dari json() ke text()
+            .then(text => {
+                if (text.includes("SUCCESS")) {
+                    syncStatus.className = "mt-4 text-xs font-semibold px-3 py-1 rounded-full inline-block bg-green-100 text-green-700";
+                    syncStatus.innerHTML = '<i class="fas fa-check-circle mr-1"></i> Data berhasil disimpan di server.';
+                } else {
+                    throw new Error("Server response error: " + text);
+                }
+            })
+            .catch(error => {
+                syncStatus.className = "mt-4 text-xs font-semibold px-3 py-1 rounded-full inline-block bg-red-100 text-red-700";
+                syncStatus.innerHTML = '<i class="fas fa-times-circle mr-1"></i> Gagal menyimpan data ke server.';
+                console.error("Error sending to GAS:", error);
+            });
+        }
+
+        // --- REPORTING LOGIC ---
+        function prepareReport() {
+            // Tembakkan data ke backend GAS
+            sendDataToGAS();
+
+            document.getElementById('rep-skor-bermain').innerText = state.scores.bermain;
+            document.getElementById('rep-skor-berlatih').innerText = state.scores.berlatih;
+            
+            // Populate PDF Data
+            document.getElementById('pdf-nama').innerText = state.studentName;
+            document.getElementById('pdf-kelas').innerText = state.studentClass;
+            const today = new Date();
+            document.getElementById('pdf-tanggal').innerText = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            
+            document.getElementById('pdf-skor-bermain').innerText = state.scores.bermain;
+            document.getElementById('pdf-skor-berlatih').innerText = state.scores.berlatih;
+            
+            let predikat = 'Perlu Bimbingan';
+            if(state.scores.berlatih >= 85) predikat = 'Sangat Baik (A)';
+            else if(state.scores.berlatih >= 70) predikat = 'Baik (B)';
+            else if(state.scores.berlatih >= 50) predikat = 'Cukup (C)';
+            document.getElementById('pdf-predikat').innerText = predikat;
+
+            const tbody = document.getElementById('pdf-table-body');
+            tbody.innerHTML = `
+                <tr>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">Level 1 (Dasar/Pemahaman)</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px; text-align:center;">3 Soal</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px; text-align:center;">24 Poin</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px; text-align:center; font-weight:bold;">${state.berlatihDetails.l1}</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">Level 2 (Sedang/Aplikasi)</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px; text-align:center;">4 Soal</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px; text-align:center;">40 Poin</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px; text-align:center; font-weight:bold;">${state.berlatihDetails.l2}</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">Level 3 (Tinggi/HOTS)</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px; text-align:center;">3 Soal</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px; text-align:center;">36 Poin</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px; text-align:center; font-weight:bold;">${state.berlatihDetails.l3}</td>
+                </tr>
+            `;
+        }
+
+        function generatePDF() {
+            const element = document.getElementById('pdf-content');
+            element.style.display = 'block';
+            
+            const opt = {
+                margin:       10,
+                filename:     `Laporan_MPI_Pancasila_${state.studentName.replace(/\s+/g, '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.display = 'none';
+            }).catch(err => {
+                console.error("PDF Generation Error, falling back to print", err);
+                window.print();
+                element.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
